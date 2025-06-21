@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (savedEmail && savedPassword) {
             // hide login interface and show app interface 
-            loginModal.classList.add("hidden_auth");
             loginModal.style.display = 'none';
             appContainer.style.display = 'block';
             
