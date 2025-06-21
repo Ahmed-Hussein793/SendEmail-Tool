@@ -19,7 +19,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (savedEmail && savedPassword) {
             // hide login interface and show app interface 
-            loginModal.classList.add = "hidden_auth";
+            loginModal.classList.add("hidden_auth");
+            loginModal.style.display = 'none';
             appContainer.style.display = 'block';
             
             // set email from saved email
@@ -68,19 +69,18 @@ document.addEventListener('DOMContentLoaded', function() {
       if (domain === 'office365.com' || domain === 'outlook.office365.com')
         return 'outlook365';
       
-      
        alert("خطأ: لم يتم التعرف على مزود الايميل");
-       return false
+       return false;
     }
 
     // login form
     loginForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        const email = document.getElementById('email').textContent;
-        const password = document.getElementById('password').textContent;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
         const service = detectService(email);
-        if (!service) return
+        if (service === false) return;
         // save login data in local
         localStorage.setItem('email', email);
         localStorage.setItem('password', password);
@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
         appContainer.style.display = 'block';
         
         // Set email in the sender field
-        document.getElementById('senderEmail').textContent = email;
+        document.getElementById('senderEmail').value = email;
     });
 
     // log out
@@ -110,10 +110,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const senderEmail = document.getElementById('senderEmail').value;
         const isMultipleRecipients = recipientType.value === 'multiple';
         const recipients = isMultipleRecipients 
-            ? document.getElementById('recipientEmails').textContent.split('\n').filter(email => email.trim() !== '')
-            : document.getElementById('recipientEmail').textContent;
-        const subject = document.getElementById('emailSubject').textContent;
-        const content = document.getElementById('emailContent').textContent;
+            ? document.getElementById('recipientEmails').value.split('\n').filter(email => email.trim() !== '')
+            : document.getElementById('recipientEmail').value;
+        const subject = document.getElementById('emailSubject').value;
+        const content = document.getElementById('emailContent').value;
         const isHtml = document.getElementById('emailType').value === 'html';
         
         // Create a data object to send
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (response.ok) {
                 alert('تم إرسال البريد بنجاح!');
                 emailForm.reset();
-                document.getElementById('senderEmail').textContent = localStorage.getItem('email');
+                document.getElementById('senderEmail').value = localStorage.getItem('email');
             } else {
                 alert(`خطأ في الإرسال: ${result.message}`);
             }
