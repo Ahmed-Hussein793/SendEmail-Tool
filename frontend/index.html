@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Sender Tool</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="assets/icon.png">
+</head>
+<body>
+    <!-- auth interface -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <h2>تسجيل الدخول</h2>
+            <p class="note">هذه الخدمة تتطلب استخدام كلمة مرور التطبيق، وليس كلمة المرور الأساسية.</p>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني:</label>
+                    <input type="email" id="email" required placeholder="example@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="password">كلمة مرور التطبيق:</label>
+                    <input type="password" id="password" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">تسجيل الدخول</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- send mail interface -->
+    <div id="appContainer" class="container">
+        <header>
+            <h1><i class="fas fa-paper-plane"></i> أداة إرسال البريد الإلكتروني</h1>
+            <button id="logoutBtn" class="logout-btn">تسجيل الخروج</button>
+        </header>
+
+        <main>
+            <form id="emailForm">
+                <div class="form-group">
+                    <label for="senderName">اسم المرسل:</label>
+                    <input type="text" id="senderName" required placeholder="اسمك أو اسم المؤسسة">
+                </div>
+
+                <div class="form-group">
+                    <label for="senderEmail">البريد الإلكتروني للمرسل:</label>
+                    <input type="email" id="senderEmail" required placeholder="yourname@gmail.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="recipientType">نوع المستلم:</label>
+                    <select id="recipientType">
+                        <option value="single">مستلم واحد</option>
+                        <option value="multiple">عدة مستلمين</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="singleRecipientGroup">
+                    <label for="recipientEmail">بريد المستلم:</label>
+                    <input type="email" id="recipientEmail" placeholder="recipient@example.com">
+                </div>
+
+                <div class="form-group" id="multipleRecipientsGroup" style="display: none;">
+                    <label for="recipientEmails">قائمة المستلمين (كل مستلم في سطر جديد):</label>
+                    <textarea id="recipientEmails" rows="4" placeholder=""></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="emailSubject">عنوان الرسالة:</label>
+                    <input type="text" id="emailSubject" required placeholder="موضوع الرسالة">
+                </div>
+
+                <div class="form-group">
+                    <label for="emailContent">نص الرسالة:</label>
+                    <textarea id="emailContent" rows="8" required placeholder="محتوى الرسالة..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="emailType">نوع الرسالة:</label>
+                    <select id="emailType">
+                        <option value="text">نص عادي</option>
+                        <option value="html">HTML</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" id="sendBtn">
+                        <i class="fas fa-paper-plane"></i> إرسال البريد
+                    </button>
+                </div>
+            </form>
+        </main>
+
+        
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
