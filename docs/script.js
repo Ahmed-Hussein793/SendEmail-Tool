@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         try {
             // Send data to background
-            const response = await fetch('https://sendemail-tool.hsynghdban4.replit.dev/send-email', {
+            const response = await fetch('https://working-dented-weight.glitch.me/send-email', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
