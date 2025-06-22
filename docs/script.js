@@ -8,7 +8,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const recipientType = document.getElementById('recipientType');
     const singleRecipientGroup = document.getElementById('singleRecipientGroup');
     const multipleRecipientsGroup = document.getElementById('multipleRecipientsGroup');
-    
+    const loader = document.getElementsByClassName("loader")[0];
+    function loading() {
+        loader.classList.remove("hidden")
+        document.body.style.overflow = 'hidden'
+        const main = document.querySelector("#main")
+        main.style.opacity = '0.3'
+    }
+    function loadingEnd() {
+        loader.classList.add("hidden")
+        document.body.style.overflow = ''
+        const main = document.querySelector("#main")
+        main.style.opacity = '1'
+    }
+    async function activateServer() {
+        fetch('https://working-dented-weight.glitch.me/send-email', {
+            method: 'GET'
+        });
+    }
     // set textarea placeholder
     document.getElementById('recipientEmails').placeholder = "recipient1@example.com\nrecipient2@example.com\n...\n..."
 
@@ -71,11 +88,11 @@ document.addEventListener('DOMContentLoaded', function() {
        alert("خطأ: لم يتم التعرف على مزود الايميل");
        return false;
     }
-
+    activateServer()
     // login form
     loginForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        
+        activateServer()
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         const service = detectService(email);
@@ -102,6 +119,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // send mail
+    
+    
     emailForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
@@ -126,9 +145,10 @@ document.addEventListener('DOMContentLoaded', function() {
             appPassword: localStorage.getItem('password'),
             service: localStorage.getItem('service')
         };
-        
         try {
             // Send data to background
+            
+            loading()
             const response = await fetch('https://working-dented-weight.glitch.me/send-email', {
                 method: 'POST',
                 headers: {
@@ -140,13 +160,17 @@ document.addEventListener('DOMContentLoaded', function() {
             const result = await response.json();
             
             if (response.ok) {
+                loadingEnd()
                 alert('تم إرسال البريد بنجاح!');
                 emailForm.reset();
                 document.getElementById('senderEmail').value = localStorage.getItem('email');
+
             } else {
+                loadingEnd()
                 alert(`خطأ في الإرسال: ${result.message}`);
             }
         } catch (error) {
+            loadingEnd()
             console.error('Error:', error);
             alert('حدث خطأ أثناء محاولة إرسال البريد. يرجى المحاولة مرة أخرى.');
         }
