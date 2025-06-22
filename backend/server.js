@@ -50,14 +50,18 @@ app.post("/send-email", async (req, res) => {
     });
   } catch (error) {
     console.error("Error sending email:", error);
+    let invailedLogin = ""
+    if (String(error).startsWith("Error: Invalid login")) {
+      invailedLogin = "خطأ في البريد الالكتروني او كلمة المرور"
+    };
     res.status(500).json({
       success: false,
-      message: "فشل إرسال البريد",
+      message: `فشل إرسال البريد: ${invailedLogin}`,
       error: error.message,
     });
   }
 });
 
 app.listen(PORT, () => {
-  console.log(`Backend server running on http://localhost:${PORT}`);
+  console.log(`Backend server is running on port ${PORT}`);
 });
