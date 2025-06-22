@@ -20,7 +20,7 @@ SendEmail-Tool/ ├── backend/            # Node.js backend server with Expr
 ---
 
 ## 🛠 Setup Instructions
-bash```
+```
 git clone https://github.com/Ahmed-Hussein793/SendEmail-Tool
 ```
 ### Backend
@@ -31,15 +31,19 @@ git clone https://github.com/Ahmed-Hussein793/SendEmail-Tool
 ```
    cd backend
 ```
+
 2. Install dependencies:
+
 ```
 npm install
 ```
 
 3. Start the server:
+   
 ```
 node server.js
 ```
+
 The server will run on http://localhost:3000
 
 Frontend
